@@ -81,3 +81,33 @@ function makeCard(cards){
     cardBox.appendChild(cardArray[i]);
   }
 }
+
+function selected(card){
+  card.classList.toggle("selected");
+  checkMatch();
+}
+
+function checkMatch() {
+  const body = document.body;
+  const selectedCards = document.querySelectorAll(".selected");
+  if(selectedCards.length === 2){
+    body.classList.add("disable-clicks");
+    if(selectedCards[0].querySelector(".back-face").innerHTML === selectedCards[1].querySelector(".back-face").innerHTML){
+      for(const card of selectedCards){
+        removeClass(card, "selected");
+        card.classList.add("match");
+      }
+      setTimeout(removeClass, 1500, body, "disable-clicks");
+    }
+    else {
+      for(const card of selectedCards){
+        setTimeout(removeClass, 1500, card, "selected");
+      }
+      setTimeout(removeClass, 2000, body, "disable-clicks");
+    }
+  }
+}
+
+function removeClass(card, cardClass){
+  card.classList.remove(cardClass);
+}
