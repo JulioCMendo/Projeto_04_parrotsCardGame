@@ -1,3 +1,9 @@
+let turnCounter = 0;
+
+function playCounter(){
+  turnCounter++;
+}
+
 function promptCardNumber(){
   let cardNum = prompt("Com quantas cartas gostaria de jogar? Apenas números pares, entre 4 e 14.");
   if(isValidNum(cardNum)){
@@ -85,6 +91,8 @@ function makeCard(cards){
 function selected(card){
   card.classList.toggle("selected");
   checkMatch();
+  playCounter();
+  setTimeout(checkWin, 300);
 }
 
 function checkMatch() {
@@ -97,17 +105,28 @@ function checkMatch() {
         removeClass(card, "selected");
         card.classList.add("match");
       }
-      setTimeout(removeClass, 1500, body, "disable-clicks");
+      setTimeout(removeClass, 1000, body, "disable-clicks");
     }
     else {
       for(const card of selectedCards){
-        setTimeout(removeClass, 1500, card, "selected");
+        setTimeout(removeClass, 1000, card, "selected");
       }
-      setTimeout(removeClass, 2000, body, "disable-clicks");
+      setTimeout(removeClass, 1000, body, "disable-clicks");
     }
   }
 }
 
 function removeClass(card, cardClass){
   card.classList.remove(cardClass);
+}
+
+function checkWin() {
+  const numberOfCards = document.querySelectorAll(".card").length;
+  const numberOfMatches = document.querySelectorAll(".match").length;
+  if(numberOfCards === numberOfMatches){
+    let string = "You've won in ";
+    string += turnCounter;
+    string += " turns!";
+    alert(string);
+  }
 }
