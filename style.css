@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  background-color: #E5E5E5;
+}
+
+.disable-click {
+  pointer-events: none;
+}
+
+.disable-scroll {
+  overflow: hidden;
+}
+
+.display-none {
+  display: none !important;
+  visibility: hidden;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.center {
+  justify-content: center;
+}
+
+.bold {
+  font-weight: 700;
+}
