@@ -1,13 +1,14 @@
 let turnCounter = 0;
-let seconds = 0;
 let miliseconds = 0;
+let seconds = 0;
+let cron;
 
 function playCounter(){
   turnCounter++;
 }
 
 function promptCardNumber(){
-  let cardNum = prompt("Com quantas cartas gostaria de jogar? Apenas números pares, entre 4 e 14.");
+  let cardNum = prompt("With how many cards do you wish to play? Only even numbers, between 4 and 14.");
   if(isValidNum(cardNum)){
     makeCard(cardNum);
   }
@@ -131,20 +132,24 @@ function checkWin() {
   const numberOfCards = document.querySelectorAll(".card").length;
   const numberOfMatches = document.querySelectorAll(".match").length;
   if(numberOfCards === numberOfMatches){
+    clearInterval(cron);
     let string = "You've won in ";
     string += turnCounter;
     string += " turns!";
     string += "\nIt took you only ";
     string += seconds;
     string += " seconds to win this time!";
-    alert(string);
-    newGame();
+    turnCounter = 0;
+    miliseconds = 0;
+    seconds = 0;
+    setTimeout(alert, 300, string);
+    setTimeout(newGame, 300);
   }
 }
 
 function startTimer() {
-  clearInterval(miliseconds);
-  miliseconds = setInterval(() => { timer(); }, 1000);
+  clearInterval(cron);
+  cron = setInterval(() => { timer(); }, 1000);
 }
 
 function timer() {
@@ -153,5 +158,26 @@ function timer() {
     miliseconds = 0;
     seconds++;
     document.querySelector(".seconds").innerHTML = seconds;
+  }
+}
+
+function newGame() {
+  const ans =  prompt("Would you like to play again? Yes / No");
+  if (ans === "Yes"){
+    const newCardBox = document.createElement("div");
+    newCardBox.classList.add("card-box", "flex-row", "center")
+
+    const cardBox = document.querySelector(".container").querySelector(".card-box");
+    document.querySelector(".container").removeChild(cardBox);
+    document.querySelector(".container").appendChild(newCardBox);
+    document.querySelector(".seconds").innerHTML = seconds;
+    setTimeout(promptCardNumber, 300);
+  }
+  else if (ans === "No"){
+    alert("Thank you for playing!");
+  }
+  else {
+    alert("Sorry, I couldn't understand your answer.");
+    newGame();
   }
 }
