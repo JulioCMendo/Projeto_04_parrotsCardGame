@@ -1,4 +1,6 @@
 let turnCounter = 0;
+let seconds = 0;
+let miliseconds = 0;
 
 function playCounter(){
   turnCounter++;
@@ -89,10 +91,15 @@ function makeCard(cards){
 }
 
 function selected(card){
-  card.classList.toggle("selected");
-  checkMatch();
-  playCounter();
-  setTimeout(checkWin, 300);
+  if(!card.classList.contains("selected")){
+    card.classList.add("selected");
+    if(turnCounter === 0) {
+      startTimer();
+    }
+    checkMatch();
+    playCounter();
+    setTimeout(checkWin, 300);
+  }
 }
 
 function checkMatch() {
@@ -127,6 +134,24 @@ function checkWin() {
     let string = "You've won in ";
     string += turnCounter;
     string += " turns!";
+    string += "\nIt took you only ";
+    string += seconds;
+    string += " seconds to win this time!";
     alert(string);
+    newGame();
+  }
+}
+
+function startTimer() {
+  clearInterval(miliseconds);
+  miliseconds = setInterval(() => { timer(); }, 1000);
+}
+
+function timer() {
+  miliseconds++;
+  if (miliseconds += 10 === 1000){
+    miliseconds = 0;
+    seconds++;
+    document.querySelector(".seconds").innerHTML = seconds;
   }
 }

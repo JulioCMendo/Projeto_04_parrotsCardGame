@@ -45,7 +45,7 @@ body {
   margin: 40px 0px;
 }
 
-.container h1 {
+h1 {
   color: #75B79E;
   font-weight: 700;
   font-size: 56px;
@@ -54,6 +54,12 @@ body {
   text-align: center;
   
   font-family: 'Roboto', sans-serif;
+}
+
+.timer {
+  position: absolute;
+  right: 40px;
+  top: 40px;
 }
 
 .card-box {
@@ -123,12 +129,28 @@ body {
   transform: rotateY(-180deg);
 }
 
+@media (max-width: 850px) {
+  h1 {
+    font-size: 36px;
+    line-height: 42px;
+  }
+}
+
+@media (max-width: 600px) {
+  .timer {
+    top: 80px;
+  }
+}
+
 @media (max-width: 425px) {
-  .container h1 {
+  h1 {
     font-size: 36px;
     line-height: 42px;
   }
   .card-box {
     max-width: 200px;
+  }
+  .timer {
+    top: 120px
   }
 }
