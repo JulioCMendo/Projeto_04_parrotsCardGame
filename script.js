@@ -62,9 +62,11 @@ function makeCard(cards){
       const newCard = document.createElement("div");
       newCard.classList.add("card");
       newCard.setAttribute("onclick", "selected(this)");
+      newCard.setAttribute("data-identifier", "card");
 
       const cardFront = document.createElement("div");
       cardFront.classList.add("face", "front-face", "flex-column", "center");
+      cardFront.setAttribute("data-identifier", "front-face");
       const cardFrontImg = document.createElement("img");
       cardFrontImg.setAttribute("src", "assets/images/card-back.png");
       cardFrontImg.setAttribute("alt", "A random card's face");
@@ -72,6 +74,7 @@ function makeCard(cards){
 
       const cardBack = document.createElement("div");
       cardBack.classList.add("face", "back-face", "flex-column", "center");
+      cardBack.setAttribute("data-identifier", "front-face");
       const randBack = document.createElement("img");
       const string = "assets/images/" + shuffled[j];
       randBack.setAttribute("src", string);
