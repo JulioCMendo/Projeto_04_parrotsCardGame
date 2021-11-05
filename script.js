@@ -170,7 +170,7 @@ function newGame() {
     const newCardBox = document.createElement("div");
     newCardBox.classList.add("card-box", "flex-row", "center")
 
-    const cardBox = document.querySelector(".container").querySelector(".card-box");
+    const cardBox = document.querySelector(".card-box");
     document.querySelector(".container").removeChild(cardBox);
     document.querySelector(".container").appendChild(newCardBox);
     document.querySelector(".seconds").innerHTML = seconds;
